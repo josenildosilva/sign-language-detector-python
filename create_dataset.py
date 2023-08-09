@@ -41,9 +41,10 @@ for dir_ in os.listdir(DATA_DIR):
                     y = hand_landmarks.landmark[i].y
                     data_aux.append(x - min(x_))
                     data_aux.append(y - min(y_))
+            if len(data_aux) == 42: # bug fix: a few images get 84 features
+                data.append(data_aux)
+                labels.append(dir_)
 
-            data.append(data_aux)
-            labels.append(dir_)
 
 f = open('data.pickle', 'wb')
 pickle.dump({'data': data, 'labels': labels}, f)
